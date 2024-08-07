@@ -1,9 +1,13 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 export default function SignIn() {
   
+  const router=useRouter();
   
   return (
     <View style={{
@@ -13,22 +17,26 @@ export default function SignIn() {
      backgroundColor: Colors.white,
 
     }}>
-
+<TouchableOpacity onPress={()=> router.back()}>
+          <Ionicons name="arrow-back-circle" size={30} color="black" />
+          </TouchableOpacity>
       <Text style={{
         fontSize:30,
+        marginTop:20,
         fontFamily: "poppins",
+     
       }}>Connectez vous</Text>
       
       <Text style={{
         fontSize:30,
         marginTop:30,
         color: 'gray',
-      }}>Bienvenue ! </Text>
+      }}>Bienvenue </Text>
 
       
 <Text style={{
         fontSize:30,
-        marginTop:40,
+        marginTop:30,
         color: 'gray',
       }}>Vous nous avez manqué ! </Text>
       
@@ -62,6 +70,7 @@ style={styles.Input}
       </View>
 
 {/* Bouton connexion*/}
+
       <View style={{
           padding : 20,
           borderRadius:15,
@@ -71,13 +80,15 @@ style={styles.Input}
         <Text style={{
           color:"white",
           textAlign:'center'
-        }}> Sign in</Text>
+        }}> Connexion</Text>
 
       </View>
 
       {/* Bouton créer un compte*/}
 
-      <View style={{
+      <TouchableOpacity 
+      onPress={()=>router.replace('auth/sign-up')}
+      style={{
           padding : 20,
           borderRadius:15,
           backgroundColor: 'white',
@@ -88,7 +99,7 @@ style={styles.Input}
           color:"black",
           textAlign:'center'
         }}> Créer un compte </Text>
-      </View>
+      </TouchableOpacity>
     </View>
     
   )
