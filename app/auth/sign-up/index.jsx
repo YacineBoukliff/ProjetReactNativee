@@ -1,11 +1,36 @@
-import { View, Text,TextInput,StyleSheet,TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { createUserWithEmailAndPassword } from 'firebase/auth/web-extension';
+import { auth } from './../../../configs/FirebaseConfig'
 
 
 export default function SignUp() {
+
+
   const router = useRouter()
+  const [email,setEmail]=useState();
+  const [password,setPassword]=useState();
+  const [fullName,setNomPrenom]=useState();
+
+
+
+  const OnCreateAccount=()=>{
+    createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log(user)
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage,errorCode)
+    // ..
+  });
+  }
+
   return (
     <>
       <View style={{ 
