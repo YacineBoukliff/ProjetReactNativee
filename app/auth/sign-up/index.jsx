@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native'
 import React, { useState } from 'react'
 import { useRouter } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -10,13 +10,20 @@ export default function SignUp() {
 
 
   const router = useRouter()
+  
   const [email,setEmail]=useState();
   const [password,setPassword]=useState();
-  const [fullName,setNomPrenom]=useState();
+  const [fullName,setFullName]=useState();
 
 
 
   const OnCreateAccount=()=>{
+
+    if(!email&!password&&!fullName){
+      ToastAndroid.show('Rentrez vos identifiants',ToastAndroid.BOTTOM)
+      return ;
+    }
+    console.log(email,password)
     createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed up 
@@ -33,7 +40,7 @@ export default function SignUp() {
 
   return (
     <>
-      <View style={{ 
+      <TouchableOpacity onPress={OnCreateAccount} style={{ 
         padding:25,
         paddingTop:50, 
         height:'100%',
@@ -58,7 +65,10 @@ export default function SignUp() {
          Nom Prenom
         </Text>
 <TextInput style={styles.Input}
- placeholder='  Entrez votre Prenom et Nom'/>
+ placeholder='  Entrez votre Nom et Prenom'
+ onChangeText={(value) =>setFullName(value)}
+ 
+ />
 
       </View>
 
@@ -71,6 +81,7 @@ export default function SignUp() {
           Email
         </Text>
 <TextInput style={styles.Input}
+onChangeText={(value) =>setEmail(value)}
  placeholder='Entrez votre email'/>
 
       </View>
@@ -86,6 +97,7 @@ export default function SignUp() {
 <TextInput  
 secureTextEntry={true}
 style={styles.Input}
+onChangeText={(value) =>setPassword(value)}
  placeholder='Entrez votre mot de passe'/>
 
  
@@ -121,10 +133,8 @@ style={styles.Input}
           textAlign:'center'
         }}> Connexion</Text>
       </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     </>
-
-    
   )
 }
 
