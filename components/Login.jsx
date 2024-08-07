@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width,
-    height: 550,
+    height: 600,
   },
   BlocTitre: {
     flex: 1,
