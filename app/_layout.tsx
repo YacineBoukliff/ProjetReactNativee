@@ -6,7 +6,9 @@ export default function RootLayout() {
     poppins: require("./../assets/fonts/Poppins-SemiBold.ttf"),
   });
   return (
-    <Stack>
+    <Stack screenOptions={{
+      headerShown:false
+    }}>
       <Stack.Screen name="index" />
     </Stack>
   );
