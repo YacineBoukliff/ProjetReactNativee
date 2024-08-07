@@ -1,10 +1,14 @@
-import { View, Image, Dimensions, StyleSheet, Text } from "react-native";
+import { View, Image, Dimensions, StyleSheet, Text,TouchableOpacity } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/Colors";
+import { useRouter } from "expo-router";
+
 
 const { width, height } = Dimensions.get("window");
 
 export default function Login() {
+
+  const router =useRouter()
   return (
     <View style={styles.container}>
       <Image
@@ -17,9 +21,10 @@ export default function Login() {
         <Text style={styles.paragraphe}>
           Bienvenue sur l'application JoJoGo. Grace a notre application votre programme voyage sera généré par notre IA quelque soit votre destination ! Prenez place pour cette magnifique aventure .
         </Text>
-        <View style={styles.bouton}>
+        <TouchableOpacity style={styles.bouton}
+        onPress={() =>router.push('auth/sign-in')}>
           <Text style={styles.textebouton}>Connectez vous avec Google.</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
